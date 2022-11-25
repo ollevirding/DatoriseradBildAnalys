@@ -1,0 +1,1 @@
+Datoriserad bildanalys
