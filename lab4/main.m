@@ -45,5 +45,14 @@ figure(7);imagesc(label_im); % View the training areas
 
 I3(:,:,1) = G; % Create an image with two bands/features
 I3(:,:,2) = B;
+I3(:,:,3) = R;
 [data,class] = create_training_data(I3,label_im); % Arrange the training data into vectors
 figure(8);scatterplot2D(data,class); % View the training feature vectors
+
+%% UNCLEAR PART OF WHAT IS GOING ON BUT I AM GUESSING CLASSIFICATION OF SOME SORT
+
+Itest = im2testdata(I3); % Reshape the image before classification
+C = classify(double(Itest),double(data),double(class)); % Train classifier and classify the data
+ImC = class2im(C,size(I3,1),size(I3,2)); % Reshape the classification to an image
+figure(9);imagesc(ImC); % View the classification result
+
