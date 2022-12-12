@@ -20,7 +20,7 @@ gray = I;
 %% PLOTTING CLASSIFIED IMAGE USING GRAYSCALE TRESHOLD
 
 t1 = 80;    %Chosen from histogram
-t2 = 150;   % ----||-----
+t2 = 135;   % ----||-----
 
 figure(4);mtresh(I,t1,t2);
 
@@ -64,9 +64,9 @@ tiledlayout(2,4)
 for i=1:1 % For-loop to hide the ugliness
 
 nexttile
-[data,class] = create_training_data(IRGB,label_im);  % Arrange the training data into vectors
-Itest = im2testdata(IRGB); % Reshape the image before classification
-C = classify(double(Itest),double(data),double(class)); % Train classifier and classify the data
+[data1,class1] = create_training_data(IRGB,label_im);  % Arrange the training data into vectors
+Itest1 = im2testdata(IRGB); % Reshape the image before classification
+C = classify(double(Itest1),double(data1),double(class1)); % Train classifier and classify the data
 ImC = class2im(C,size(IRGB,1),size(IRGB,2)); % Reshape the classification to an image
 imagesc(ImC); % View the classification result
 title('Classification of image using Channels: RGB')
