@@ -117,6 +117,18 @@ keep('I','template','mask','cutouts','nrOfObjects');%'objectMap');
 
 % Place for your own texture analysis. 
 
+newCutouts = zeros(1, nrOfObjects);
+offsets=[]
+for i=1:nrOfObjects
+    imgCell = cutouts{i};
+    
+    coMat = graycomatrix(imgCell, "Offset", [1 2])
+
+    ent = entropy(imgCell);
+    % nånting co-occurent
+    % Om krav uppfylls ==> Continue
+    % Annars ta bort bilden
+end
 
 
 
