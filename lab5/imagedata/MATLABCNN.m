@@ -6,36 +6,21 @@
 
 %%
 labels = string(readmatrix("labels.txt")); % read the labels from a file
-Y = string(zeros(length(labels),1));
+Y = string(zeros(1200*3, 1));
 for i=1:length(Y)
-    Y(i) = strjoin(labels(i,1),',');
+    Y(i) = labels(i);
 end
 Y = categorical(Y);
 %%
 % Loop through the images and resize them
 close all
-kmax = 0;
+X = cell(3600,1);
 for i =1:1200
     filename = "train_" + sprintf('%04d',i) + ".png";
-    im = imread(filename);
-    im = imbinarize(im,graythresh(im));
-    im = imcomplement(im);
-
-    % Erode the image to separate the numbers (Didn't work)
-    se = strel('square', 2);
-    im = imerode(im, se);
-
-    im = medfilt2(im, [5, 5]);
-
-    im = imcrop(im, [70 60 150 100]);
-    im = imresize(im, [56, 56]); % resize the image
-    im = uint8(255*im);
-    im2 = imgaussfilt(im, 2,"FilterSize",[3, 3]);
-    im = imerode(im, strel('square',2));
-    im = im + im2;
-
-    %imshow(im)
-    X{i} = im; % append the image to the X array
+    [im1, im2, im3] = splitimage(filename);
+    X{i + (2*(i-1))} = im1; % append the image to the X array
+    X{i + 1 + (2*(i-1))} = im2; % append the image to the X array5
+    X{i + 2 + (2*(i-1))} = im3; % append the image to the X array
 end
 %%
 ImageFolder ='ProcessedImages/';
@@ -55,7 +40,7 @@ imds = imageDatastore('ProcessedImages/', 'Labels', Y);
 
 %%
 
-numTrainingFiles = 300;
+numTrainingFiles = 1000;
 [imdsTrain,imdsTest] = splitEachLabel(imds,numTrainingFiles,'randomize');
 
 %%
