@@ -20,9 +20,9 @@ if max(max(dist) > 5.5)
 else
     im = imerode(im, strel("sphere", 2));
 end
-end
+
 %%
-imm = 255*uint8(im);
+%imm = 255*uint8(im);
 %figure(4)
 %imshow(imm)
 
