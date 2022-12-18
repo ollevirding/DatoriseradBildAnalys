@@ -6,11 +6,9 @@
 
 %%
 labels = string(readmatrix("labels.txt")); % read the labels from a file
-Y = string(zeros(1200*3, 1));
-for i=1:length(Y)
-    Y(i) = labels(i);
-end
+Y = reshape(labels.',1,[]);
 Y = categorical(Y);
+
 %%
 % Loop through the images and resize them
 close all
@@ -26,11 +24,11 @@ end
 ImageFolder ='ProcessedImages/';
 
 for i=1:length(X)
-    file_name = sprintf('Image%d.png', i);% name Image with a sequence of number, ex Image1.png , Image2.png....
+    file_name = sprintf('Image%d.png', i); % name Image with a sequence of number, ex Image1.png , Image2.png....
     fullFileName = fullfile(ImageFolder, file_name);
     imwrite(X{i},file_name,'png') %save the image as a Portable Graphics Format file(png)into the MatLab
-    imgName = [ImageFolder,'\Image_',num2str(i),'.png'] ;
-    imwrite(X{i},imgName) ; 
+    imgName = [ImageFolder,'Image_',num2str(i),'.png'];
+    imwrite(X{i},imgName);
 end
 
 %%
@@ -42,6 +40,8 @@ imds = imageDatastore('ProcessedImages/', 'Labels', Y);
 
 numTrainingFiles = 1000;
 [imdsTrain,imdsTest] = splitEachLabel(imds,numTrainingFiles,'randomize');
+
+
 
 %%
 
