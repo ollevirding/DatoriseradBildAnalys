@@ -17,7 +17,7 @@ close all
 X = cell(3600,1);
 for i =1:1200
     filename = "train_" + sprintf('%04d',i) + ".png";
-    [im1, im2, im3] = splitimage(filename);
+    [im1, im2, im3] = splitimagef(filename);
     X{i + (2*(i-1))} = im1; % append the image to the X array
     X{i + 1 + (2*(i-1))} = im2; % append the image to the X array5
     X{i + 2 + (2*(i-1))} = im3; % append the image to the X array
