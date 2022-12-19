@@ -24,10 +24,10 @@ end
 ImageFolder ='ProcessedImages/';
 
 for i=1:length(X)
-    file_name = sprintf('Image%d.png', i); % name Image with a sequence of number, ex Image1.png , Image2.png....
+    file_name = "Image"+num2str(i,'%04.f'); % name Image with a sequence of number, ex Image1.png , Image2.png....
     fullFileName = fullfile(ImageFolder, file_name);
     imwrite(X{i},file_name,'png') %save the image as a Portable Graphics Format file(png)into the MatLab
-    imgName = [ImageFolder,'Image_',num2str(i),'.png'];
+    imgName = [ImageFolder,'Image_',num2str(i,'%04.f'),'.png'];
     imwrite(X{i},imgName);
 end
 
