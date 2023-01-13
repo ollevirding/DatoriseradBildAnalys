@@ -2,7 +2,7 @@
 
 labels = string(readmatrix("labels.txt")); % read the labels from a file
 Y = reshape(labels.',1,[]);
-Y = categorical(Y);
+Y = categorical(Y)';
 
 %%
 
@@ -81,7 +81,6 @@ layers = [    imageInputLayer([28 28 1])
     batchNormalizationLayer
     reluLayer  
     dropoutLayer(0.25)
-    fullyConnectedLayer(10)
     fullyConnectedLayer(3)
     softmaxLayer
     classificationLayer
@@ -89,7 +88,7 @@ layers = [    imageInputLayer([28 28 1])
 
 options = trainingOptions('adam', ...
     'ExecutionEnvironment','gpu',...
-    'MaxEpochs',60,...
+    'MaxEpochs',120,...
     'InitialLearnRate',1e-3, ...
     'ValidationData',imdsTest, ...
     'ValidationFrequency',10,...

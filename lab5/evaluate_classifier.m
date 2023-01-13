@@ -7,7 +7,7 @@ true_labels = importdata('labels.txt');
 % For instance, if you choose to save your parameters as an .mat-file
 % you can load them using the load(filename) function.
 % You are allowed to have more/less than 2 parameters.
-parameters{1} = load("network.mat");
+parameters{1} = load("network100.mat");
 parameters{2} = 'this is another parameter for my classifier.';
 
 %% Evaluate the classifier
