@@ -19,12 +19,20 @@ for i = 1:1200
 name = "train_" + sprintf('%04d',i) + ".png";
 
 img = imread("imagedata/" + name);
-img = medfilt2(img, [5, 5]);
+imshow(img)
+pause(2)
+img = imclose(img, strel('sphere', 1) );
+imshow(img)
+pause(2)
 bw_img = imbinarize(img,"global");
 
 
 im = imcomplement(bw_img);
-im = bwareaopen(im,20);
+imshow(im)
+pause(2)
+im = imerode(im, strel('square',3));
+imshow(im)
+pause(2)
 
 
 
